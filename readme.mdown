@@ -1,0 +1,13 @@
+Team Notes for What_the_duck
+---
+
+Course:
+	name
+	prof
+	feedback
+	course_score
+		fun
+		difficulty
+		standerlised
+	Email / User Name(optional)
+
