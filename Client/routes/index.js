@@ -39,11 +39,13 @@ router.get('/add.html', function(req, res, next) {
 
 // 添加一条数据
 router.post('/add.html', function(req, res, next) {
-    
+
     var demo = new Demo({
-        uid: req.body.uid,
-        title: req.body.title,
-        content: req.body.content
+        Name_g: req.body.Name_g,
+        Name_s: req.body.Name_s,
+        Difficulty: req.body.Difficulty,
+        Engagement: req.body.Engagement,
+        Review: req.body.Review
     });
 
     console.log('======================create========================');
@@ -52,12 +54,12 @@ router.post('/add.html', function(req, res, next) {
         console.log(doc);
         res.redirect('/');
     });
-    
+
 });
 
 // 根据id删除对应的数据
 router.get('/del.html', function(req, res, next) {
-    
+
     var id = req.query.id;
 
     if (id && id != '') {
@@ -67,12 +69,12 @@ router.get('/del.html', function(req, res, next) {
             res.redirect('/');
         });
     }
-    
+
 });
 
 // 查询对应修改记录，并跳转到修改页面
 router.get('/update.html', function(req, res, next) {
-    
+
     var id = req.query.id;
 
     if (id && id != '') {
@@ -84,12 +86,12 @@ router.get('/update.html', function(req, res, next) {
             });
         });
     }
-    
+
 });
 
 // 修改数据
 router.post('/update.html', function(req, res, next) {
-    
+
     var demo = {
         uid: req.body.uid,
         title: req.body.title,
@@ -105,7 +107,7 @@ router.post('/update.html', function(req, res, next) {
             res.redirect('/');
         });
     }
-    
+
 });
 
 
