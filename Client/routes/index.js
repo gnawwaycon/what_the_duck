@@ -22,16 +22,21 @@ router.get('/', function(req, res, next) {
             title: 'Main',
             demos: subjects
         });
+
     });
 });
 
 router.get('/test.html', function(req, res, next) {
-    Demo.find().distinct('Name_s', function(error, subjects) {
-        res.render('test', {
-            title: 'test',
-            demos: subjects
+    var Name_g = req.query.Name_g;
+
+    if (Name_g && Name_g != '') {
+        Demo.find({'Name_g' : Name_g}, function(err, docs) {
+            res.render('test', {
+                title: 'Show me the fuking info I want bitch',
+                demos: docs
+            });
         });
-    });
+    }
 });
 
 
