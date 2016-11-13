@@ -7,11 +7,11 @@ var Demo = model.Demo;
 
 mongoose.connect('mongodb://localhost/express_demo');
 
-// 首页
+// 首页 Index
 router.get('/', function(req, res, next) {
     Demo.find(function(err, docs) {
         res.render('index', {
-            title: 'Express+MongoDb示例',
+            title: 'Main',
             demos: docs
         });
     });
@@ -31,7 +31,7 @@ router.get('/test.html', function(req, res, next) {
 router.get('/add.html', function(req, res, next) {
     Demo.find(function(err, docs) {
         res.render('add', {
-            title: 'Express+MongoDb示例',
+            title: 'Adding Data',
             demos: docs
         });
     });
@@ -77,15 +77,15 @@ router.get('/update.html', function(req, res, next) {
 
     var id = req.query.id;
 
-    if (id && id != '') {
+    // if (id && id != '') {
         Demo.findById(id, function(err, docs) {
             console.log('========================findById(\"' + id + '\")=======================\n' + docs);
             res.render('update', {
-                title: '修改数据',
+                title: 'Modify the Data',
                 demo: docs
             });
         });
-    }
+    // }
 
 });
 
@@ -93,9 +93,11 @@ router.get('/update.html', function(req, res, next) {
 router.post('/update.html', function(req, res, next) {
 
     var demo = {
-        uid: req.body.uid,
-        title: req.body.title,
-        content: req.body.content
+        Name_g: req.body.Name_g,
+        Name_s: req.body.Name_s,
+        Difficulty: req.body.Difficulty,
+        Engagement: req.body.Engagement,
+        Review: req.body.Review
     };
 
     var id = req.body.id;
