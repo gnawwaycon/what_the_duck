@@ -45,7 +45,7 @@ router.get('/index_2.html', function(req, res, next) {
             console.log(docs);
             setTimeout(function () {
                 res.render('index_2', {
-                    title: 'Show me the fuking info I want bitch',
+                    title: 'Choose the sepcific course you want',
                     demos: docs
                 });
             },1000)
@@ -104,7 +104,7 @@ router.get('/update.html', function(req, res, next) {
     if (Name_s && Name_s != '') {
         Demo.find({'Name_s' : Name_s}, function(err, docs) {
             res.render('update', {
-                title: 'Show me the fuking info I want bitch',
+                title: 'Course Details',
                 demos: docs
             });
         });
