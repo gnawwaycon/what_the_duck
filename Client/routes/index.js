@@ -26,12 +26,12 @@ router.get('/', function(req, res, next) {
     });
 });
 
-router.get('/test.html', function(req, res, next) {
+router.get('/index_2.html', function(req, res, next) {
     var Name_g = req.query.Name_g;
 
     if (Name_g && Name_g != '') {
         Demo.find({'Name_g' : Name_g}, function(err, docs) {
-            res.render('test', {
+            res.render('index_2', {
                 title: 'Show me the fuking info I want bitch',
                 demos: docs
             });
@@ -93,36 +93,12 @@ router.get('/update.html', function(req, res, next) {
                 demos: docs
             });
         });
-        // Demo.findById(Name_s, function(err, docs) {
-        //     console.log('========================findById(\"' + Name_s + '\")=======================\n' + docs);
-        //     res.render('update', {
-        //         title: '修改数据',
-        //         demo: docs
-        //     });
-        // });
+
     }
 
 });
 
-// router.post('/update.html', function(req, res, next) {
 
-//     var demo = {
-//         uid: req.body.uid,
-//         title: req.body.title,
-//         content: req.body.content
-//     };
-
-//     var id = req.body.id;
-
-//     if (id && id != '') {
-//         console.log('=======================update id = ' + id);
-//         Demo.findByIdAndUpdate(id, demo, function(err, docs) {
-//             console.log(docs);
-//             res.redirect('/');
-//         });
-//     }
-
-// });
 
 
 module.exports = router;
