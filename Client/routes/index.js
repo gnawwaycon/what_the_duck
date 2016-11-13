@@ -7,30 +7,38 @@ var Demo = model.Demo;
 
 mongoose.connect('mongodb://localhost/express_demo');
 
+// router.get('/', function(req, res, next) {
+//     Demo.find(function(err, docs) {
+//         res.render('index', {
+//             title: 'Main',
+//             demos: docs
+//         });
+//     });
+// });
+
 router.get('/', function(req, res, next) {
     Demo.find().distinct('Name_g', function(error, subjects) {
-    // ids is an array of all ObjectIds
-    res.render('test', {
-        title: 'TEST PAGE',
-        demos: subjects
-    });
-});
-    });
-});
-
-router.get('/test.html', function(req, res, next) {
-    Demo.find(function(err, docs) {
-        res.render('test', {
-            title: 'TEST PAGE',
-            demos: docs
+        res.render('index', {
+            title: 'Main',
+            demos: subjects
         });
     });
 });
 
+router.get('/test.html', function(req, res, next) {
+    Demo.find().distinct('Name_s', function(error, subjects) {
+        res.render('test', {
+            title: 'test',
+            demos: subjects
+        });
+    });
+});
+
+
 router.get('/add.html', function(req, res, next) {
     Demo.find(function(err, docs) {
         res.render('add', {
-            title: 'Express+MongoDb示例',
+            title: 'Add New Review',
             demos: docs
         });
     });
@@ -39,8 +47,8 @@ router.get('/add.html', function(req, res, next) {
 router.post('/add.html', function(req, res, next) {
 
     var demo = new Demo({
-        Name_g: req.body.Name_g,
-        Name_s: req.body.Name_s,
+        Name_g: req.body.Name_g.replace(/\s/g, '-'),
+        Name_s: req.body.Name_s.replace(/\s/g, '-'),
         Difficulty: req.body.Difficulty,
         Engagement: req.body.Engagement,
         Review: req.body.Review
@@ -91,25 +99,25 @@ router.get('/update.html', function(req, res, next) {
 
 });
 
-router.post('/update.html', function(req, res, next) {
+// router.post('/update.html', function(req, res, next) {
 
-    var demo = {
-        uid: req.body.uid,
-        title: req.body.title,
-        content: req.body.content
-    };
+//     var demo = {
+//         uid: req.body.uid,
+//         title: req.body.title,
+//         content: req.body.content
+//     };
 
-    var id = req.body.id;
+//     var id = req.body.id;
 
-    if (id && id != '') {
-        console.log('=======================update id = ' + id);
-        Demo.findByIdAndUpdate(id, demo, function(err, docs) {
-            console.log(docs);
-            res.redirect('/');
-        });
-    }
+//     if (id && id != '') {
+//         console.log('=======================update id = ' + id);
+//         Demo.findByIdAndUpdate(id, demo, function(err, docs) {
+//             console.log(docs);
+//             res.redirect('/');
+//         });
+//     }
 
-});
+// });
 
 
 module.exports = router;
