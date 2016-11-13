@@ -7,7 +7,6 @@ var Demo = model.Demo;
 
 mongoose.connect('mongodb://localhost/express_demo');
 
-// 首页
 router.get('/', function(req, res, next) {
     Demo.find(function(err, docs) {
         res.render('index', {
@@ -17,7 +16,6 @@ router.get('/', function(req, res, next) {
     });
 });
 
-// Test
 router.get('/test.html', function(req, res, next) {
     Demo.find(function(err, docs) {
         res.render('test', {
@@ -27,7 +25,6 @@ router.get('/test.html', function(req, res, next) {
     });
 });
 
-// 跳转到添加数据页面
 router.get('/add.html', function(req, res, next) {
     Demo.find(function(err, docs) {
         res.render('add', {
@@ -37,7 +34,6 @@ router.get('/add.html', function(req, res, next) {
     });
 });
 
-// 添加一条数据
 router.post('/add.html', function(req, res, next) {
 
     var demo = new Demo({
@@ -57,7 +53,6 @@ router.post('/add.html', function(req, res, next) {
 
 });
 
-// 根据id删除对应的数据
 router.get('/del.html', function(req, res, next) {
 
     var id = req.query.id;
@@ -72,24 +67,28 @@ router.get('/del.html', function(req, res, next) {
 
 });
 
-// 查询对应修改记录，并跳转到修改页面
 router.get('/update.html', function(req, res, next) {
 
-    var id = req.query.id;
+    var Name_s = req.query.Name_s;
 
-    if (id && id != '') {
-        Demo.findById(id, function(err, docs) {
-            console.log('========================findById(\"' + id + '\")=======================\n' + docs);
-            res.render('update', {
-                title: '修改数据',
-                demo: docs
+    if (Name_s && Name_s != '') {
+        Demo.find({'Name_s' : Name_s}, function(err, docs) {
+            res.render('index', {
+                title: 'Express+MongoDb示例',
+                demos: docs
             });
         });
+        // Demo.findById(Name_s, function(err, docs) {
+        //     console.log('========================findById(\"' + Name_s + '\")=======================\n' + docs);
+        //     res.render('update', {
+        //         title: '修改数据',
+        //         demo: docs
+        //     });
+        // });
     }
 
 });
 
-// 修改数据
 router.post('/update.html', function(req, res, next) {
 
     var demo = {
