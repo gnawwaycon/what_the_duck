@@ -11,11 +11,10 @@
 </head>
 
 <body>
-    <div class="bs-docs-header" id="content">
-        <div class="container">
-            <h1>Details info Bitch</h1>
-        </div>
-    </div>
+    <nav class="materialize-red lighten-1" role="navigation">
+      <div class="nav-wrapper container"><a id="logo-container" href="https://yacs.cs.rpi.edu/" class="brand-logo">YACS 2.0 beta</a>
+      </div>
+    </nav>
     <div class="container">
         <% demos.forEach(function( demo ){ %>
         <div class="row">
@@ -26,18 +25,19 @@
                 <p><%= demo.Review %></p>
               </div>
               <div class="card-action white-text">
-                <p>Difficulty: <%= demo.Difficulty %></p>
-                <p>Engagement: <%= demo.Engagement %></p>
+                <p>Class Engagement: <%= demo.Engagement %></p>
+                <p>Class Difficulty: <%= demo.Difficulty %></p>
+
               </div>
             </div>
           </div>
         </div>
         <% }); %>
 
-     </div>     
+     </div>
     </div>
 
-  <footer class="page-footer orange">
+  <footer class="page-footer  red lighten-1">
     <div class="container">
       <div class="row">
         <div class="col l12 s12">
@@ -51,7 +51,7 @@
       Made by <a class="orange-text text-lighten-3" href="http://bobmayuze.github.io">Yuze Bob Ma</a>
       </div>
     </div>
-  </footer>    
+  </footer>  
 </body>
 
 </html>
