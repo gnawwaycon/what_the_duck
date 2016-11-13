@@ -13,56 +13,27 @@
 <body>
     <div class="bs-docs-header" id="content">
         <div class="container">
-            <h1>Detail info Bitch</h1>
+            <h1>Details info Bitch</h1>
         </div>
     </div>
     <div class="container">
+        <% demos.forEach(function( demo ){ %>
         <div class="row">
-                <table class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>Name_g</th>
-                            <th>Name_s</th>
-                            <th>Difficulty</th>
-                            <th>Engagement</th>
-                            <th>Review</th>
-                            <th>CreateTime</th>
-                            <th>Operation</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        <% demos.forEach(function( demo ){ %>
-                            <tr>
-                                <td>
-                                    <%= demo._id %>
-                                </td>
-                                <td>
-                                    <%= demo.Name_g %>
-                                </td>
-                                <td>
-                                    <%= demo.Name_s %>
-                                </td>
-                                <td>
-                                    <%= demo.Difficulty %>
-                                </td>
-                                <td>
-                                    <%= demo.Engagement %>
-                                </td>
-                                <td>
-                                    <%= demo.Review %>
-                                </td>
-                                <td>
-                                    <%= demo.createTime %>
-                                </td>                                
-                                <td><a href="del.html?id=<%= demo.id %>">Delete</a> | <a href="update.html?id=<%= demo.id %>">Modify</a></td>
-                            </tr>
-                            <% }); %>
-                    </tbody>
-                </table>
-
+          <div class="col s12 m12 ">
+            <div class="card blue-grey darken-1">
+              <div class="card-content white-text">
+                <span class="card-title"><%= demo.Name_s %></span>
+                <p><%= demo.Review %></p>
+              </div>
+              <div class="card-action">
+                <!-- <a href="update.html?Name_s=<%= demo.Name_s %>">More</a> -->
+              </div>
+            </div>
+          </div>
         </div>
+        <% }); %>
+
+     </div>     
     </div>
 </body>
 
