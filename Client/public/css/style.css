@@ -44,3 +44,10 @@ nav {
 #cheese {
 	margin-top: 14em;
 }
+.btn-floating {
+	/*position: fixed;*/
+	z-index: 99;	
+    /*margin-left: 65%;*/
+    /*margin-top: 6%;*/
+
+}
