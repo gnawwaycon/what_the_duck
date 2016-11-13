@@ -73,8 +73,8 @@ router.get('/update.html', function(req, res, next) {
 
     if (Name_s && Name_s != '') {
         Demo.find({'Name_s' : Name_s}, function(err, docs) {
-            res.render('index', {
-                title: 'Express+MongoDb示例',
+            res.render('update', {
+                title: 'Show me the fuking info I want bitch',
                 demos: docs
             });
         });
