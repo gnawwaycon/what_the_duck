@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require('mongoose');
+const fetch = require('node-fetch');
 var model = require('../models/model');
 var Demo = model.Demo;
 
@@ -25,6 +26,13 @@ router.get('/', function(req, res, next) {
 
     });
 });
+
+router.get('/trip', function(req, res, next) {
+    fetch(`http://api.tripadvisor.com/api/partner/2.0/map/42.729164,-73.678503/attractions?key=fab17784-d8ff-4094-ab3f-e0f81a8df0a5`)
+    .then(response => response.json())
+    .then(body => res.send(body.data))
+});
+
 
 router.get('/index_2.html', function(req, res, next) {
     var Name_g = req.query.Name_g;
