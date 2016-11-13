@@ -9,7 +9,6 @@ mongoose.connect('mongodb://localhost/express_demo');
 
 router.get('/', function(req, res, next) {
     Demo.find().distinct('Name_g', function(error, subjects) {
-    // ids is an array of all ObjectIds
     res.render('test', {
         title: 'TEST PAGE',
         demos: subjects
@@ -19,12 +18,16 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/test.html', function(req, res, next) {
-    Demo.find(function(err, docs) {
-        res.render('test', {
-            title: 'TEST PAGE',
-            demos: docs
+    var Name_g = req.query.Name_g;
+
+    if (Name_g && Name_g != '') {
+        Demo.find({'Name_g' : Name_g}, function(err, docs) {
+            res.render('test', {
+                title: 'Show me the fuking info I want bitch',
+                demos: docs
+            });
         });
-    });
+    }
 });
 
 router.get('/add.html', function(req, res, next) {
