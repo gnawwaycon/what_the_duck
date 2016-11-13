@@ -8,11 +8,13 @@ var Demo = model.Demo;
 mongoose.connect('mongodb://localhost/express_demo');
 
 router.get('/', function(req, res, next) {
-    Demo.find(function(err, docs) {
-        res.render('index', {
-            title: 'Express+MongoDb示例',
-            demos: docs
-        });
+    Demo.find().distinct('Name_g', function(error, subjects) {
+    // ids is an array of all ObjectIds
+    res.render('test', {
+        title: 'TEST PAGE',
+        demos: subjects
+    });
+});
     });
 });
 
