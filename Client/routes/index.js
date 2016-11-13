@@ -28,18 +28,30 @@ router.get('/', function(req, res, next) {
 
 router.get('/index_2.html', function(req, res, next) {
     var Name_g = req.query.Name_g;
+    var docs = [];
 
     if (Name_g && Name_g != '') {
-        Demo.find({'Name_g' : Name_g}, function(err, docs) {
+        Demo.find().distinct('Name_s', function(error, subjects) {
+            console.log("SUB:" + subjects);
+            subjects.forEach(function(element) {
+                Demo.findOne({Name_s: element}, function(error, moreElement) {
+                    if(moreElement.Name_g === Name_g) {
+                        console.log(element);
+                        docs.push(moreElement);
+                    }
+                })
 
-
-            res.render('index_2', {
-                title: 'Show me the fuking info I want bitch',
-                demos: docs
-            });
-
+            })
+            console.log(docs);
+            setTimeout(function () {
+                res.render('index_2', {
+                    title: 'Show me the fuking info I want bitch',
+                    demos: docs
+                });
+            },1000)
         });
-    }
+
+        }
 });
 
 
