@@ -31,10 +31,13 @@ router.get('/index_2.html', function(req, res, next) {
 
     if (Name_g && Name_g != '') {
         Demo.find({'Name_g' : Name_g}, function(err, docs) {
+
+
             res.render('index_2', {
                 title: 'Show me the fuking info I want bitch',
                 demos: docs
             });
+
         });
     }
 });
