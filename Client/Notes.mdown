@@ -1,19 +1,16 @@
-Open mongo DB:
 
-Step 1:
-Setting the dbpath of mongodb to the path I want
-```
-sudo mongod --dbpath data/db/
-```
+Team Notes for What_the_duck
+---
 
-Step 2:
-```
-mongo
-```
+Course:
+	name_general: text
+	name_specific: text
+	prof: text
+	feedback:
+	course_score
+		fun
+		difficulty
+		standerlised
+	Email / User Name(optional)
 
-Start mongodb
-
-Step 3:
-```
-nodemon
-```
+CSS: http://materializecss.com/forms.html
