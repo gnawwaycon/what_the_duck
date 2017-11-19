@@ -2,48 +2,84 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require('mongoose');
+const fetch = require('node-fetch');
 var model = require('../models/model');
 var Demo = model.Demo;
 
 mongoose.connect('mongodb://localhost/express_demo');
 
-// 首页
+// router.get('/', function(req, res, next) {
+//     Demo.find(function(err, docs) {
+//         res.render('index', {
+//             title: 'Main',
+//             demos: docs
+//         });
+//     });
+// });
+
 router.get('/', function(req, res, next) {
-    Demo.find(function(err, docs) {
+    Demo.find().distinct('Name_g', function(error, subjects) {
         res.render('index', {
-            title: 'Express+MongoDb示例',
-            demos: docs
+            title: 'Main',
+            demos: subjects
         });
+
     });
 });
 
-// Test
-router.get('/test.html', function(req, res, next) {
-    Demo.find(function(err, docs) {
-        res.render('test', {
-            title: 'TEST PAGE',
-            demos: docs
-        });
-    });
+router.get('/trip', function(req, res, next) {
+    fetch(`http://api.tripadvisor.com/api/partner/2.0/map/42.729164,-73.678503/attractions?key=fab17784-d8ff-4094-ab3f-e0f81a8df0a5`)
+    .then(response => response.json())
+    .then(body => res.send(body.data))
 });
 
-// 跳转到添加数据页面
+
+router.get('/index_2.html', function(req, res, next) {
+    var Name_g = req.query.Name_g;
+    var docs = [];
+
+    if (Name_g && Name_g != '') {
+        Demo.find().distinct('Name_s', function(error, subjects) {
+            console.log("SUB:" + subjects);
+            subjects.forEach(function(element) {
+                Demo.findOne({Name_s: element}, function(error, moreElement) {
+                    if(moreElement.Name_g === Name_g) {
+                        console.log(element);
+                        docs.push(moreElement);
+                    }
+                })
+
+            })
+            console.log(docs);
+            setTimeout(function () {
+                res.render('index_2', {
+                    title: 'Choose the sepcific course you want',
+                    demos: docs
+                });
+            },1000)
+        });
+
+        }
+});
+
+
 router.get('/add.html', function(req, res, next) {
     Demo.find(function(err, docs) {
         res.render('add', {
-            title: 'Express+MongoDb示例',
+            title: 'Add New Review',
             demos: docs
         });
     });
 });
 
-// 添加一条数据
 router.post('/add.html', function(req, res, next) {
-    
+
     var demo = new Demo({
-        uid: req.body.uid,
-        title: req.body.title,
-        content: req.body.content
+        Name_g: req.body.Name_g.replace(/\s/g, '-'),
+        Name_s: req.body.Name_s.replace(/\s/g, '-'),
+        Difficulty: req.body.Difficulty,
+        Engagement: req.body.Engagement,
+        Review: req.body.Review
     });
 
     console.log('======================create========================');
@@ -52,12 +88,11 @@ router.post('/add.html', function(req, res, next) {
         console.log(doc);
         res.redirect('/');
     });
-    
+
 });
 
-// 根据id删除对应的数据
 router.get('/del.html', function(req, res, next) {
-    
+
     var id = req.query.id;
 
     if (id && id != '') {
@@ -67,46 +102,26 @@ router.get('/del.html', function(req, res, next) {
             res.redirect('/');
         });
     }
-    
+
 });
 
-// 查询对应修改记录，并跳转到修改页面
 router.get('/update.html', function(req, res, next) {
-    
-    var id = req.query.id;
 
-    if (id && id != '') {
-        Demo.findById(id, function(err, docs) {
-            console.log('========================findById(\"' + id + '\")=======================\n' + docs);
+    var Name_s = req.query.Name_s;
+
+    if (Name_s && Name_s != '') {
+        Demo.find({'Name_s' : Name_s}, function(err, docs) {
             res.render('update', {
-                title: '修改数据',
-                demo: docs
+                title: 'Course Details',
+                demos: docs
             });
         });
+
     }
-    
+
 });
 
-// 修改数据
-router.post('/update.html', function(req, res, next) {
-    
-    var demo = {
-        uid: req.body.uid,
-        title: req.body.title,
-        content: req.body.content
-    };
 
-    var id = req.body.id;
-
-    if (id && id != '') {
-        console.log('=======================update id = ' + id);
-        Demo.findByIdAndUpdate(id, demo, function(err, docs) {
-            console.log(docs);
-            res.redirect('/');
-        });
-    }
-    
-});
 
 
 module.exports = router;

@@ -1,5 +1,7 @@
-function alertName() {
-	firstName = document.getElementById("5824daa6decd537756bcb3cb").innerHTML;
-	alert(firstName);	
-};
+
+$(document).ready(function() {
+  $('.dropdown-button').dropdown();
+});
+
+
 

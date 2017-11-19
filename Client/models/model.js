@@ -2,9 +2,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var demoSchema = new Schema({
-    uid: String,
-    title: String,
-    content: String,
+    Name_g : String,
+    Name_s : String,
+    Difficulty: Number,
+    Engagement: Number,
+    Review: String,
     createTime: {
         type: Date,
         default: Date.now

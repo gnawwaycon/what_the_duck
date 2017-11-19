@@ -1,15 +1,21 @@
-Team Notes for What_the_duck
----
+To start
 
-Course:
-	name_general: text
-	name_specific: text
-	prof: text
-	feedback: 
-	course_score
-		fun
-		difficulty
-		standerlised
-	Email / User Name(optional)
+Step 1:
+Setting the dbpath of mongodb to the path I want
+```
+sudo mongod --dbpath data/db/
+```
 
-CSS: http://materializecss.com/forms.html
+Step 2:
+```
+mongo
+```
+
+Starts mongodb
+
+Step 3:
+cd Client and install dependencies and run
+```
+npm install
+npm start
+```
